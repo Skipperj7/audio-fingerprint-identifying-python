@@ -3,7 +3,7 @@ import os
 import sys
 import libs
 import libs.fingerprint as fingerprint
-
+import json
 from termcolor import colored
 from libs.reader_file import FileReader
 from libs.db_sqlite import SqliteDatabase
@@ -45,12 +45,8 @@ if __name__ == '__main__':
 
       values = []
       for hash, offset in hashes:
-        values.append((filename, hash, offset))
-
-      msg = '   storing %d hashes in db' % len(values)
-      print colored(msg, 'green')
-
-      print('----------values-----------')
-      print(values)
-
+        values.append({'hash':hash,'offset':offset})
+      with open('your_file.json', 'w') as f:
+        json.dump(values, f)
+          
   print('end')
